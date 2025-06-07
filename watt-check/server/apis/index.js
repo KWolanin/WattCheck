@@ -13,7 +13,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "watt-check.vercel.app:5173",
   })
 );
 
@@ -161,3 +161,5 @@ const getChapterDetails = async (url) => {
     return { views: 0, stars: 0, comments: 0 };
   }
 };
+
+module.exports = app;
