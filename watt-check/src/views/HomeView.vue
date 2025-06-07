@@ -6,25 +6,23 @@
         <ClearBtn @clear="clear" />
       </div>
       <StatsComp :data="jsonData" />
-
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import UrlSelector from "../components/UrlSelector.vue";
 import StatsComp from "../components/StatsComp.vue";
 import ClearBtn from "../components/ClearBtn.vue"
-import ChapterStats from "../components/ChapterStats.vue";
 
-const jsonData = ref(null);
+const jsonData = ref<string>("");
 
-const handleData = (data) => {
+const handleData = (data: string) => {
   jsonData.value = data;
 };
 
 const clear = () => {
-  jsonData.value = null;
+  jsonData.value = "";
 };
 </script>

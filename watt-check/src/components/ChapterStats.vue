@@ -92,7 +92,7 @@ const chartDataList = computed(() => [
   }
 ])
 
-const chartOptions = {
+/* const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -116,5 +116,37 @@ const chartOptions = {
       beginAtZero: true
     }
   }
-}
+} */
+
+
+import type { TooltipItem } from 'chart.js';
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false
+    },
+    tooltip: {
+      callbacks: {
+        title: (tooltipItems: TooltipItem<'bar'>[]) => {
+          const index = tooltipItems[0].dataIndex;
+          return sortedChapters.value[index].title;
+        },
+        label: (tooltipItem: TooltipItem<'bar'>) => {
+          const datasetLabel = tooltipItem.dataset.label ?? '';
+          const formattedValue = tooltipItem.formattedValue ?? '';
+          return `${datasetLabel}: ${formattedValue}`;
+        }
+      }
+    }
+  },
+  scales: {
+    y: {
+      beginAtZero: true
+    }
+  }
+};
+
 </script>

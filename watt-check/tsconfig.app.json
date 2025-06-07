@@ -6,6 +6,7 @@
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
+     "types": ["vue"],
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
