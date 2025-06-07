@@ -67,7 +67,8 @@ const handleFetch = async () => {
     // http://localhost:3000
     const res = await fetch('https://watt-check-1yy4-naw7uzzrz-kais-projects-363dcde5.vercel.app/api/story', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',  "Access-Control-Allow-Origin": "*"
+ },
       body: JSON.stringify({ url: url.value }),
     })
     const data = await res.json()
