@@ -39,6 +39,10 @@ app.listen(PORT, () => {
   console.log(`Serwer działa na http://localhost:${PORT}`);
 });
 
+app.get("/api/test", () => {
+  return "uwuu"
+})
+
 // Get Story general details
 app.post("/api/story", async (req, res) => {
   try {

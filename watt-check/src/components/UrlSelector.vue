@@ -65,7 +65,7 @@ const handleFetch = async () => {
   try {
     // watt-check-1yy4-naw7uzzrz-kais-projects-363dcde5.vercel.app
     // http://localhost:3000
-    const res = await fetch('apis-j14x6nnhw-kais-projects-363dcde5.vercel.app/api/story', {
+    const res = await fetch('https://apis-j14x6nnhw-kais-projects-363dcde5.vercel.app/api/story', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',  "Access-Control-Allow-Origin": "*"
  },
