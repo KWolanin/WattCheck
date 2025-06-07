@@ -1,0 +1,30 @@
+<template>
+  <div class="bg-purple-950">
+    <UrlSelector v-if="!jsonData" @fetched="handleData" />
+    <div v-if="jsonData">
+      <div class="w-full">
+        <ClearBtn @clear="clear" />
+      </div>
+      <StatsComp :data="jsonData" />
+
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from "vue";
+import UrlSelector from "../components/UrlSelector.vue";
+import StatsComp from "../components/StatsComp.vue";
+import ClearBtn from "../components/ClearBtn.vue"
+import ChapterStats from "../components/ChapterStats.vue";
+
+const jsonData = ref(null);
+
+const handleData = (data) => {
+  jsonData.value = data;
+};
+
+const clear = () => {
+  jsonData.value = null;
+};
+</script>
