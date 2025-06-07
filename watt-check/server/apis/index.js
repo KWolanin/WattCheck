@@ -161,5 +161,3 @@ const getChapterDetails = async (url) => {
     return { views: 0, stars: 0, comments: 0 };
   }
 };
-
-module.exports = app;
