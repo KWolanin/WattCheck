@@ -17,18 +17,20 @@ app.use(express.json());
 //   })
 // );
 
-app.options("*", (req, res) => {
+app.use(cors({
+  origin: "*", // Możesz zmienić na konkretną domenę np. "https://watt-check.vercel.app"
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"]
+}));
+
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.status(200).end();
+  next();
 });
 
-app.use(cors({
-  origin: "https://watt-check.vercel.app",
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+
 
 
 const scraper = new WattpadScraper();
@@ -175,3 +177,5 @@ const getChapterDetails = async (url) => {
     return { views: 0, stars: 0, comments: 0 };
   }
 };
+
+module.exports = app;
