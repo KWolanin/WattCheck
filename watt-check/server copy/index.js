@@ -1,6 +1,6 @@
 import express from "express";
-import WattpadScraper from "../custom-libs/wattpad-scraper/src/index.js";
-import WattPads from "../custom-libs/@dhnapi/wattpad.js/src/wattpad.js";
+import WattpadScraper from "./custom-libs/wattpad-scraper/src/index.js";
+import WattPads from "./custom-libs/@dhnapi/wattpad.js/src/wattpad.js";
 import fetch from "node-fetch";
 import * as cheerio from "cheerio";
 import serverless from 'serverless-http'
