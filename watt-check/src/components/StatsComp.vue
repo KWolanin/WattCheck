@@ -71,7 +71,7 @@ const getAuthorLink = computed(() => `https://www.wattpad.com/user/${props.data.
 
 onMounted(async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/user', {
+    const res = await fetch('https://wattcheck.onrender.com/user', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user: props.data.result.author }),

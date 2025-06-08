@@ -60,7 +60,7 @@ const emit = defineEmits(['loadStats'])
 
 onMounted(async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/chapter', {
+    const res = await fetch('https://wattcheck.onrender.com/chapter', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: props.chapter.link }),
