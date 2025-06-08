@@ -63,12 +63,12 @@ const handleFetch = async () => {
 
   loading.value = true
   try {
-    // watt-check-1yy4-naw7uzzrz-kais-projects-363dcde5.vercel.app
-    // http://localhost:3000
-    const res = await fetch('https://apis-j14x6nnhw-kais-projects-363dcde5.vercel.app/api/story', {
+    const url = "https://watt-check-backend-7kfesnrmo-kais-projects-363dcde5.vercel.app/story"
+    const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json',  "Access-Control-Allow-Origin": "*"
- },
+      headers: {
+        'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*"
+      },
       body: JSON.stringify({ url: url.value }),
     })
     const data = await res.json()

@@ -10,7 +10,11 @@ let wattpad = new WattPads();
 
 const app = express();
 // const PORT = 3000;
-app.use(cors())
+import cors from 'cors'
+app.use(cors({
+  origin: 'https://watt-check.vercel.app'
+}))
+
 app.use(express.json());
 // app.use(
 //   cors({
@@ -40,12 +44,12 @@ const scraper = new WattpadScraper();
 //   console.log(`Serwer działa na http://localhost:${PORT}`);
 // });
 
-app.get("/api/test", () => {
+app.get("/test", () => {
   return "uwuu"
 })
 
 // Get Story general details
-app.post("/api/story", async (req, res) => {
+app.post("/story", async (req, res) => {
   try {
     const { url } = req.body;
     if (!url) {
@@ -97,7 +101,7 @@ const getStory = async function (url) {
   });
 };
 
-app.post("/api/user", async (req, res) => {
+app.post("/user", async (req, res) => {
   try {
     const { user } = req.body;
     if (!user) {
@@ -129,7 +133,7 @@ const getUser = async (user) => {
   });
 };
 
-app.post("/api/chapter", async (req, res) => {
+app.post("/chapter", async (req, res) => {
   try {
     const { url } = req.body;
     if (!url) {
@@ -183,4 +187,4 @@ const getChapterDetails = async (url) => {
   }
 };
 
-module.exports.handler = serverless(app)
+export const handler = serverless(app)
