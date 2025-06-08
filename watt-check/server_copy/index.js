@@ -66,7 +66,7 @@ function timeoutPromise(promise, ms) {
   ])
 }
 
-app.post("/", async (req, res) => {
+app.post("/story", async (req, res) => {
   try {
     const { url } = req.body
     if (!url) {
@@ -121,7 +121,7 @@ const getStory = async function (url) {
     );
   });
 };
-/* 
+
 app.post("/user", async (req, res) => {
   try {
     const { user } = req.body;
@@ -207,4 +207,3 @@ const getChapterDetails = async (url) => {
     return { views: 0, stars: 0, comments: 0 };
   }
 };
- */
