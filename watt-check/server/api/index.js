@@ -10,7 +10,6 @@ let wattpad = new WattPads();
 
 const app = express();
 // const PORT = 3000;
-import cors from 'cors'
 app.use(cors({
   origin: 'https://watt-check.vercel.app'
 }))

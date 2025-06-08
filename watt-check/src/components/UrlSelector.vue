@@ -63,11 +63,11 @@ const handleFetch = async () => {
 
   loading.value = true
   try {
-    const url = "https://watt-check-backend-7kfesnrmo-kais-projects-363dcde5.vercel.app/story"
+    const url = "https://watt-check-backend-7kfesnrmo-kais-projects-363dcde5.vercel.app/api/story"
     const res = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ url: url.value }),
     })
