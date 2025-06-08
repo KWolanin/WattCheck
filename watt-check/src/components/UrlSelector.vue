@@ -64,6 +64,7 @@ const handleFetch = async () => {
   loading.value = true
   try {
     const urlBackend = "https://wattcheck.onrender.com/story"
+    console.log(urlBackend)
     const res = await fetch(urlBackend, {
       method: 'POST',
       headers: {
