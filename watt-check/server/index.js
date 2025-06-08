@@ -1,11 +1,8 @@
 import express from "express";
-import WattpadScraper from "../custom-libs/wattpad-scraper/src/index.js";
-import WattPads from "../custom-libs/@dhnapi/wattpad.js/src/wattpad.js";
+import WattpadScraper from "./custom-libs/wattpad-scraper/src/index.js";
+import WattPads from "./custom-libs/@dhnapi/wattpad.js/src/wattpad.js";
 import fetch from "node-fetch";
 import * as cheerio from "cheerio";
-import serverless from 'serverless-http'
-
-
 import cors from "cors";
 
 let wattpad = new WattPads();
@@ -19,79 +16,64 @@ app.options(/(.*)/, cors({
   origin: 'https://watt-check.vercel.app'
 }))
 
-
-app.use(express.json());
-
-
 const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`API działa na porcie ${port}`)
 })
 
+app.use(express.json());
+
 const scraper = new WattpadScraper();
 
 
-// app.get("/test", (req, res) => {
-//   res.send("uwuu")
-// })
-
-
 // Get Story general details
-// app.post("/", async (req, res) => {
-//   try {
-//     const { url } = req.body;
-//     if (!url) {
-//       return res.status(400).json({ error: "Brakuje url" });
-//     }
-//     const storyResponse = await getStory(url);
-//     if (!storyResponse || storyResponse.length === 0) {
-//       return res.status(404).json({ error: "Story details not found." });
-//     }
-
-//     storyResponse.chapters = await getChapters(url);
-
-//     res.status(200).json(storyResponse);
-//   } catch (error) {
-//     console.error("Error:", error.message);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-
-
-function timeoutPromise(promise, ms) {
-  return Promise.race([
-    promise,
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Timeout after ' + ms + ' ms')), ms)
-    )
-  ])
-}
-
-app.post("/", async (req, res) => {
+app.post("/story", async (req, res) => {
   try {
-    const { url } = req.body
+    const { url } = req.body;
     if (!url) {
-      return res.status(400).json({ error: "Brakuje url" })
+      return res.status(400).json({ error: "Brakuje url" });
     }
-
-    console.time('getStory')
-    const storyResponse = await timeoutPromise(getStory(url), 5000)
-    console.timeEnd('getStory')
-
+    const storyResponse = await getStory(url);
     if (!storyResponse || storyResponse.length === 0) {
-      return res.status(404).json({ error: "Story details not found." })
+      return res.status(404).json({ error: "Story details not found." });
     }
 
-    console.time('getChapters')
-    storyResponse.chapters = await timeoutPromise(getChapters(url), 5000)
-    console.timeEnd('getChapters')
+    storyResponse.chapters = await getChapters(url);
 
-    res.status(200).json(storyResponse)
+    res.status(200).json(storyResponse);
   } catch (error) {
-    console.error("Error:", error.message)
-    res.status(500).json({ error: "Server error: " + error.message })
+    console.error("Error:", error.message);
+    res.status(500).json({ error: "Server error" });
   }
-})
+});
+
+
+// function timeoutPromise(promise, ms) {
+//   return Promise.race([
+//     promise,
+//     new Promise((_, reject) =>
+//       setTimeout(() => reject(new Error('Timeout after ' + ms + ' ms')), ms)
+//     )
+//   ])
+// }
+
+// app.post("/story", async (req, res) => {
+//   try {
+//     const { url } = req.body
+//     if (!url) {
+//       return res.status(400).json({ error: "Brakuje url" })
+//     }
+//     const storyResponse = await timeoutPromise(getStory(url), 5000)
+//     if (!storyResponse || storyResponse.length === 0) {
+//       return res.status(404).json({ error: "Story details not found." })
+//     }
+//     storyResponse.chapters = await timeoutPromise(getChapters(url), 5000)
+//     res.status(200).json(storyResponse)
+//   } catch (error) {
+//     console.error("Error:", error.message)
+//     res.status(500).json({ error: "Server error: " + error.message })
+//   }
+// })
 
 
 
@@ -122,7 +104,8 @@ const getStory = async function (url) {
     );
   });
 };
-/* 
+
+// get user details
 app.post("/user", async (req, res) => {
   try {
     const { user } = req.body;
@@ -155,6 +138,7 @@ const getUser = async (user) => {
   });
 };
 
+// get chapter details
 app.post("/chapter", async (req, res) => {
   try {
     const { url } = req.body;
@@ -208,9 +192,3 @@ const getChapterDetails = async (url) => {
     return { views: 0, stars: 0, comments: 0 };
   }
 };
- */
-//export const handler = serverless(app)
-//export default serverless(app)
-
-const handler = serverless(app)
-export default handler
