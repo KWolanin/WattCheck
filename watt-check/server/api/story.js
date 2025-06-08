@@ -23,6 +23,11 @@ app.options(/(.*)/, cors({
 app.use(express.json());
 
 
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`API działa na porcie ${port}`)
+})
+
 const scraper = new WattpadScraper();
 
 
