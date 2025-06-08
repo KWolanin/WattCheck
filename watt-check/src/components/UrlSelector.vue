@@ -63,8 +63,8 @@ const handleFetch = async () => {
 
   loading.value = true
   try {
-    const url = "watt-check-backend.vercel.app/api/story"
-    const res = await fetch(url, {
+    const urlBackend = "watt-check-backend.vercel.app/api/story"
+    const res = await fetch(urlBackend, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
