@@ -63,7 +63,7 @@ const handleFetch = async () => {
 
   loading.value = true
   try {
-    const url = "https://watt-check-backend-7kfesnrmo-kais-projects-363dcde5.vercel.app/api/story"
+    const url = "watt-check-backend.vercel.app/api/story"
     const res = await fetch(url, {
       method: 'POST',
       headers: {
