@@ -1,6 +1,6 @@
 import express from "express";
-import WattpadScraper from "./custom-libs/wattpad-scraper/src/index.js";
-import WattPads from "./custom-libs/@dhnapi/wattpad.js/src/wattpad.js";
+import WattpadScraper from "../custom-libs/wattpad-scraper/src/index.js";
+import WattPads from "../custom-libs/@dhnapi/wattpad.js/src/wattpad.js";
 import fetch from "node-fetch";
 import * as cheerio from "cheerio";
 
@@ -9,7 +9,8 @@ import cors from "cors";
 let wattpad = new WattPads();
 
 const app = express();
-const PORT = 3000;
+// const PORT = 3000;
+app.use(cors())
 app.use(express.json());
 // app.use(
 //   cors({
@@ -17,27 +18,27 @@ app.use(express.json());
 //   })
 // );
 
-app.use(cors({
-  origin: "*", // Możesz zmienić na konkretną domenę np. "https://watt-check.vercel.app"
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"]
-}));
+// app.use(cors({
+//   origin: "*", // Możesz zmienić na konkretną domenę np. "https://watt-check.vercel.app"
+//   methods: ["GET", "POST", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"]
+// }));
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+// });
 
 
 
 
 const scraper = new WattpadScraper();
 
-app.listen(PORT, () => {
-  console.log(`Serwer działa na http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Serwer działa na http://localhost:${PORT}`);
+// });
 
 app.get("/api/test", () => {
   return "uwuu"
@@ -182,4 +183,4 @@ const getChapterDetails = async (url) => {
   }
 };
 
-module.exports = app;
+module.exports.handler = serverless(app)
