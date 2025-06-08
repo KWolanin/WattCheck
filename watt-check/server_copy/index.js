@@ -19,6 +19,10 @@ app.options(/(.*)/, cors({
   origin: 'https://watt-check.vercel.app'
 }))
 
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`API działa na porcie ${port}`)
+})
 
 app.use(express.json());
 
@@ -204,8 +208,3 @@ const getChapterDetails = async (url) => {
   }
 };
  */
-//export const handler = serverless(app)
-//export default serverless(app)
-
-const handler = serverless(app)
-export default handler
