@@ -38,7 +38,9 @@
       </span>
     </div>
 
-    <span class="text-sm text-gray-500 whitespace-nowrap">{{ chapter.date }}</span>
+<span class="text-sm text-gray-500 whitespace-nowrap">
+  {{ formatDate(new Date(chapter.date), { dateStyle: 'medium' }) }}
+</span>
   </a>
 </template>
 
@@ -46,6 +48,11 @@
 import { onMounted, ref } from 'vue'
 
 const backendUrl = import.meta.env.VITE_API_URL
+
+import { useI18n } from 'vue-i18n'
+
+const { d: formatDate } = useI18n()
+
 
 const props = defineProps<{
   chapter: {

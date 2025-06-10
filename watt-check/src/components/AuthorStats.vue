@@ -5,8 +5,8 @@
                 {{ user.username }}
             </a>
             <img :src="user.avatar" class="rounded mt-2 mx-auto" width="80" height="80" alt="user avatar" />
-            <p class="mt-2">opublikowano: {{ user.publishedStories }} </p>
-            <p>obserwujących: {{ user.followers }}</p>
+            <p class="mt-2">{{ $t('published') }}: {{ user.publishedStories }} </p>
+            <p>{{ $t('followers') }}: {{ user.followers }}</p>
         </div>
 
         <div v-else class="animate-pulse flex flex-col items-center space-y-3">

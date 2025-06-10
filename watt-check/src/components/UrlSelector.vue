@@ -3,19 +3,19 @@
     <div class="w-full max-w-xl">
       <div class="p-4 w-full flex items-center justify-center">
         <p class="text-white font-bold text-3xl p-4">
-          Wattpad stats checker
+          {{ $t('app_title') }}
         </p>
       </div>
 
       <div class="flex space-x-4">
         <input
           class="flex-1 px-4 py-2 border border-gray-300 text-gray-200 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-          type="text" placeholder="Wklej link do opowiadania (http://wattpad.com/story/...)" v-model="url"
+          type="text" :placeholder="$t('paste_here')" v-model="url"
           @keyup.enter="handleFetch" />
         <button
           class="bg-amber-500 text-white shadow-md px-4 py-2 rounded hover:bg-yellow-500 transition whitespace-nowrap flex items-center justify-center font-bold"
           @click="handleFetch" :disabled="loading">
-          <span v-if="!loading">Załaduj fika!</span>
+          <span v-if="!loading">{{$t('load')}}</span>
           <svg v-else class="w-5 h-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
             viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
@@ -37,9 +37,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 const backendUrl = import.meta.env.VITE_API_URL
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
 
 
 const emit = defineEmits(['fetched'])
@@ -48,7 +51,10 @@ const url = ref('')
 const error = ref('')
 const loading = ref(false)
 const loadingMessage = ref('')
-const values = ['Wczytywanie fika...', 'To może zająć chwilę...', 'Jeszcze moment...',]
+
+const values_pl = ['Wczytywanie fika...', 'To może zająć chwilę...', 'Jeszcze moment...']
+const values_en = ['Loading story...', 'This may take a while...', 'Almost there...']
+
 let index = 0
 let intervalId = null
 
@@ -87,12 +93,14 @@ const handleFetch = async () => {
 
 watch(loading, (newVal) => {
   if (newVal) {
+    const currentList = locale.value === 'en' ? values_en : values_pl
+    loadingMessage.value = currentList[0]
     intervalId = setInterval(() => {
-      index = (index + 1) % values.length
-      loadingMessage.value = values[index]
+      index = (index + 1) % currentList.length
+      loadingMessage.value = currentList[index]
     }, 3000)
   } else {
-    clearInterval(intervalId)
+    clearInterval(intervalId!)
     intervalId = null
     index = 0
     loadingMessage.value = ''

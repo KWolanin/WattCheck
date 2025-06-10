@@ -1,10 +1,7 @@
 <template>
   <div class="space-y-10 p-4">
-    <div
-      v-for="(data, index) in chartDataList"
-      :key="index"
-      class="bg-amber-200 p-4 rounded border border-amber-800 shadow"
-    >
+    <div v-for="(data, index) in chartDataList" :key="index"
+      class="bg-amber-200 p-4 rounded border border-amber-800 shadow">
       <h2 class="text-lg font-semibold mb-2">{{ data.title }}</h2>
       <div class="h-64">
         <Bar :data="data.chartData" :options="chartOptions" />
@@ -25,6 +22,14 @@ import {
   CategoryScale,
   LinearScale
 } from 'chart.js'
+import type { TooltipItem } from 'chart.js';
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
+
+
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -52,12 +57,12 @@ const labels = computed(() => sortedChapters.value.map((_, index) => `#${index +
 
 const chartDataList = computed(() => [
   {
-    title: 'Wyświetlenia',
+    title: capitalize(t('views')),
     chartData: {
       labels: labels.value,
       datasets: [
         {
-          label: 'Wyświetlenia',
+          label: capitalize(t('views')),
           backgroundColor: 'oklch(69.6% 0.17 162.48)',
           data: sortedChapters.value.map(ch => ch.stats.views)
         }
@@ -65,12 +70,12 @@ const chartDataList = computed(() => [
     }
   },
   {
-    title: 'Gwiazdki',
+    title: capitalize(t('votes')),
     chartData: {
       labels: labels.value,
       datasets: [
         {
-          label: 'Gwiazdki',
+          label: capitalize(t('votes')),
           backgroundColor: 'oklch(62.7% 0.265 303.9)',
           data: sortedChapters.value.map(ch => ch.stats.stars)
         }
@@ -78,12 +83,12 @@ const chartDataList = computed(() => [
     }
   },
   {
-    title: 'Komentarze',
+    title: capitalize(t('comments')),
     chartData: {
       labels: labels.value,
       datasets: [
         {
-          label: 'Komentarze',
+          label: capitalize(t('comments')),
           backgroundColor: 'oklch(68.5% 0.169 237.323)',
           data: sortedChapters.value.map(ch => ch.stats.comments)
         }
@@ -95,7 +100,6 @@ const chartDataList = computed(() => [
 
 
 
-import type { TooltipItem } from 'chart.js';
 
 const chartOptions = {
   responsive: true,
