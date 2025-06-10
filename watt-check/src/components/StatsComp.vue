@@ -50,7 +50,9 @@ import { defineProps, computed, ref, onMounted } from 'vue'
 import TagComp from './TagComp.vue'
 import ChapterBar from './ChapterBar.vue'
 import ChapterStats from './ChapterStats.vue'
-import {backendUrl} from "../url.ts"
+// import {backendUrl} from "../url.ts"
+const backendUrl = import.meta.env.VITE_API_URL
+
 
 
 const props = defineProps({

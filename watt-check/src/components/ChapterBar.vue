@@ -41,7 +41,10 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import {backendUrl} from "../url.ts"
+// import {backendUrl} from "../url.ts"
+
+const backendUrl = import.meta.env.VITE_API_URL
+
 
 const props = defineProps<{
   chapter: {

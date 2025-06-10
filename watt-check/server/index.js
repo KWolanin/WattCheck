@@ -17,7 +17,7 @@ app.options(/(.*)/, cors({
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
-  console.log(`API działa na porcie ${port}`)
+  console.log(`API works on ${port} port`)
 })
 
 app.use(express.json());
