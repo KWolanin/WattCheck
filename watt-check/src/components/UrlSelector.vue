@@ -39,6 +39,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import {backendUrl} from "../url.ts"
 
 const emit = defineEmits(['fetched'])
 
@@ -63,8 +64,7 @@ const handleFetch = async () => {
 
   loading.value = true
   try {
-    const urlBackend = "https://wattcheck.onrender.com/story"
-    console.log(urlBackend)
+    const urlBackend = `${backendUrl}/story`
     const res = await fetch(urlBackend, {
       method: 'POST',
       headers: {

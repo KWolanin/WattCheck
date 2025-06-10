@@ -41,6 +41,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import {backendUrl} from "../url.ts"
+
 const props = defineProps<{
   chapter: {
     link: string
@@ -60,7 +62,7 @@ const emit = defineEmits(['loadStats'])
 
 onMounted(async () => {
   try {
-    const res = await fetch('https://wattcheck.onrender.com/chapter', {
+    const res = await fetch(`${backendUrl}/chapter`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: props.chapter.link }),
