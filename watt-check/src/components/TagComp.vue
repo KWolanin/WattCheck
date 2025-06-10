@@ -15,9 +15,9 @@ const props = defineProps({
 })
 
 const tailwindColors = [
-  'bg-amber-500',
+  'bg-purple-500',
   'bg-emerald-500',
-  'bg-sky-700',
+  'bg-sky-500',
   'bg-rose-500'
 ]
 

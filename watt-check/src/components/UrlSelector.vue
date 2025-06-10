@@ -39,7 +39,6 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-// import {backendUrl} from "../url.ts"
 const backendUrl = import.meta.env.VITE_API_URL
 
 
@@ -72,7 +71,7 @@ const handleFetch = async () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ url: url.value }),
+      body: JSON.stringify({ url: url.value.trim() }),
     })
     const data = await res.json()
     emit('fetched', data)

@@ -3,7 +3,7 @@
     <div
       v-for="(data, index) in chartDataList"
       :key="index"
-      class="bg-amber-100 p-4 rounded border border-amber-800 shadow"
+      class="bg-amber-200 p-4 rounded border border-amber-800 shadow"
     >
       <h2 class="text-lg font-semibold mb-2">{{ data.title }}</h2>
       <div class="h-64">
@@ -71,7 +71,7 @@ const chartDataList = computed(() => [
       datasets: [
         {
           label: 'Gwiazdki',
-          backgroundColor: 'oklch(76.9% 0.188 70.08)',
+          backgroundColor: 'oklch(62.7% 0.265 303.9)',
           data: sortedChapters.value.map(ch => ch.stats.stars)
         }
       ]
@@ -84,7 +84,7 @@ const chartDataList = computed(() => [
       datasets: [
         {
           label: 'Komentarze',
-          backgroundColor: 'oklch(50% 0.134 242.749)',
+          backgroundColor: 'oklch(68.5% 0.169 237.323)',
           data: sortedChapters.value.map(ch => ch.stats.comments)
         }
       ]
@@ -92,31 +92,7 @@ const chartDataList = computed(() => [
   }
 ])
 
-/* const chartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false
-    },
-    tooltip: {
-      callbacks: {
-        title: (tooltipItems: { dataIndex: any }[]) => {
-          const index = tooltipItems[0].dataIndex
-          return sortedChapters.value[index].title
-        },
-        label: (tooltipItem: { dataset: { label: any }; formattedValue: any }) => {
-          return `${tooltipItem.dataset.label}: ${tooltipItem.formattedValue}`
-        }
-      }
-    }
-  },
-  scales: {
-    y: {
-      beginAtZero: true
-    }
-  }
-} */
+
 
 
 import type { TooltipItem } from 'chart.js';
