@@ -41,7 +41,7 @@ type ChapterStats = {
 
 type Chapter = {
   title: string,
-  index: number,
+  chapterNo: number,
   stats: ChapterStats
 }
 
@@ -49,8 +49,8 @@ const props = defineProps<{
   chapters: Chapter[]
 }>()
 
-const sortedChapters = computed(() =>
-  [...props.chapters].sort((a, b) => a.index - b.index)
+const sortedChapters = computed(() => {
+ return [...props.chapters].sort((a, b) => a.chapterNo - b.chapterNo)}
 )
 
 const labels = computed(() => sortedChapters.value.map((_, index) => `#${index + 1}`))

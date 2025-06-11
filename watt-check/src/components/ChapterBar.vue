@@ -88,7 +88,7 @@ onMounted(async () => {
     })
     stats.value = await res.json()
     emit('loadStats', {
-      chapterNo: props.index,
+      chapterNo: props.index + 1,
       stats: stats.value,
       title: props.chapter.title
     })

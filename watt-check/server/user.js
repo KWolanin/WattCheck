@@ -7,7 +7,6 @@ import * as cheerio from "cheerio";
  * @returns User object
  */
 export const getUser = async (username) => {
-
      const profileUrl = `https://www.wattpad.com/user/${username}`
       const res = await fetch(encodeURI(profileUrl));
       const html = await res.text();

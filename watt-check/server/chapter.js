@@ -68,7 +68,10 @@ export async function getChapters(url) {
 
     chapterList.push({ title, link, date });
   });
-  return chapterList
+  const uniqueChapters = Array.from(
+    new Map(chapterList.map(ch => [ch.link, ch])).values()
+  )
+  return uniqueChapters
 }
 
 

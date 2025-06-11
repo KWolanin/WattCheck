@@ -29,7 +29,7 @@ app.post("/story", async (req, res) => {
   try {
     const { url } = req.body;
     if (!url) {
-      return res.status(400).json({ error: "Brakuje url" });
+      return res.status(400).json({ error: "no url" });
     }
     const storyResponse = await getStory(url);
     if (!storyResponse || storyResponse.length === 0) {
@@ -50,7 +50,7 @@ app.post("/user", async (req, res) => {
   try {
     const { user } = req.body;
     if (!user) {
-      return res.status(400).json({ error: "Brakuje url" });
+      return res.status(400).json({ error: "no url" });
     }
     let userResponse = await getUser(user);
     if (!userResponse || userResponse.length === 0) {
@@ -68,7 +68,7 @@ app.post("/chapter", async (req, res) => {
   try {
     const { url } = req.body;
     if (!url) {
-      return res.status(400).json({ error: "Brakuje url" });
+      return res.status(400).json({ error: "no url" });
     }
     let chapterResponse = await getChapterStats(url);
     if (!chapterResponse || chapterResponse.length === 0) {
